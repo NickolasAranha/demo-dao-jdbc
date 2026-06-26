@@ -66,17 +66,12 @@ public class DepartmentDaoJDBC implements DepartmentDao {
     public void deleteById(Integer id) {
         PreparedStatement st = null;
         try {
-         st = conn.prepareStatement("DELETE FROM department WHERE Id = ?");
-            SellerDao sellerDao = DaoFactory.createSellerDao();
-            List<Seller> list = sellerDao.findByDepartment(new Department(id, null));
-            for (Seller obj : list) {
-                sellerDao.deleteById(obj.getId());
-            }
+            st = conn.prepareStatement("DELETE FROM department WHERE Id = ?");
             st.setInt(1, id);
-         int rowsAffected = st.executeUpdate();
-         if (rowsAffected == 0) {
-             throw new DbException("Unexpected error! Id not found!");
-         }
+            int rowsAffected = st.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new DbException("Unexpected error! Id not found!");
+            }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
