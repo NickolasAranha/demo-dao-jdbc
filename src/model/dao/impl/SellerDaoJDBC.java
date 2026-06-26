@@ -203,7 +203,6 @@ public class SellerDaoJDBC implements SellerDao {
             List<Seller> list = new ArrayList<>();
             Map<Integer, Department> map = new HashMap<>();
 
-
             while (rs.next()) {
 
                 Department dep = map.get(rs.getInt("DepartmentId"));
